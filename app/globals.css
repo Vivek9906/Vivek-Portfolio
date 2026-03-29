@@ -1,0 +1,460 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-light: #E8E8E3;
+  --bg-dark: #0a0a0a;
+  --text-primary: #171717;
+  --text-light: #E8E8E3;
+  --text-muted: #8C8C73;
+  --border-subtle: #1a1a1a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  cursor: none;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  html, body {
+    cursor: auto;
+  }
+}
+
+::selection {
+  background-color: var(--text-primary);
+  color: var(--bg-light);
+}
+
+/* Fluid Typography */
+.heading-xl {
+  font-size: clamp(2.5rem, 8vw, 9rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.heading-lg {
+  font-size: clamp(2rem, 6vw, 6rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.heading-md {
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.heading-sm {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.body-text {
+  font-size: clamp(0.875rem, 1.2vw, 1.1rem);
+  line-height: 1.6;
+}
+
+.label-text {
+  font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Section spacing */
+.section-padding {
+  padding-top: clamp(80px, 12vw, 160px);
+  padding-bottom: clamp(80px, 12vw, 160px);
+}
+
+.content-width {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 4vw, 60px);
+  padding-right: clamp(20px, 4vw, 60px);
+}
+
+/* Nav double text hover — larger font for editorial feel */
+.nav-link-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
+  height: 1.4em;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.nav-link-wrapper span {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.nav-link-wrapper:hover span:first-child {
+  transform: translateY(-100%);
+}
+
+.nav-link-wrapper:hover span:last-child {
+  transform: translateY(-100%);
+}
+
+/* Navbar — compact links, full-width bar */
+.nav-link-wrapper--header {
+  font-size: clamp(0.62rem, 0.75vw, 0.78rem);
+  letter-spacing: 0.12em;
+  height: 1.35em;
+  font-weight: 600;
+}
+
+@media (min-width: 1280px) {
+  .nav-link-wrapper--header {
+    font-size: clamp(0.68rem, 0.82vw, 0.82rem);
+  }
+}
+
+/* Custom cursor */
+.custom-cursor {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: white;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(1);
+}
+
+.custom-cursor.hover {
+  transform: scale(2.2);
+}
+
+/* Availability badge pulse dot */
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* Marquee */
+.marquee-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+}
+
+.marquee-item {
+  flex-shrink: 0;
+  font-size: clamp(1.2rem, 2.5vw, 2.5rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  color: var(--text-light);
+}
+
+/* Hero ticker marquee */
+.hero-ticker {
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  overflow: hidden;
+  padding: 0.75rem 0;
+  width: 100%;
+}
+
+.hero-ticker-track {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  white-space: nowrap;
+}
+
+.hero-ticker-text {
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Dark section */
+.dark-section {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+/* Light section */
+.light-section {
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+}
+
+/* Stacking scroll — pinned section sits behind, next section slides over */
+.sticky-section {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.stack-above {
+  position: relative;
+  z-index: 2;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Grayscale image */
+.grayscale-hover {
+  filter: grayscale(100%);
+  transition: filter 0.6s ease;
+}
+
+.grayscale-hover:hover {
+  filter: grayscale(0%);
+}
+
+/* Floating label */
+.floating-label-group {
+  position: relative;
+}
+
+.floating-label-group input,
+.floating-label-group textarea {
+  width: 100%;
+  padding: 1.25rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-light);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+  font-family: inherit;
+}
+
+.floating-label-group input:focus,
+.floating-label-group textarea:focus {
+  border-bottom-color: var(--text-light);
+}
+
+.floating-label-group label {
+  position: absolute;
+  top: 1.25rem;
+  left: 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.floating-label-group input:focus ~ label,
+.floating-label-group input:not(:placeholder-shown) ~ label,
+.floating-label-group textarea:focus ~ label,
+.floating-label-group textarea:not(:placeholder-shown) ~ label {
+  top: -0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  background-color: var(--text-primary);
+  color: var(--text-light);
+  font-size: 0.875rem;
+  z-index: 9998;
+  animation: slideInUp 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 3px;
+}
+
+/* Mobile menu */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-dark);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-menu-link {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: opacity 0.3s;
+  letter-spacing: 0.05em;
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+.mobile-menu-link:hover {
+  opacity: 0.4;
+}
+
+/* Project card */
+.project-card {
+  border-top: 1px solid var(--border-subtle);
+  transition: background-color 0.3s ease;
+}
+
+.project-card:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Hamburger button lines */
+.hamburger-line {
+  display: block;
+  height: 1.5px;
+  background-color: white;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), width 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger-line--top {
+  width: 24px;
+}
+
+.hamburger-line--bottom {
+  width: 16px;
+}
+
+.hamburger-line--top.active {
+  width: 22px;
+  transform: translateY(4.75px) rotate(45deg);
+}
+
+.hamburger-line--bottom.active {
+  width: 22px;
+  transform: translateY(-4.75px) rotate(-45deg);
+}
+
+/* Bento grid for interests */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.bento-grid .bento-wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 767px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-grid .bento-wide {
+    grid-column: span 1;
+  }
+}
+
+/* Project stack scroll */
+.project-stack-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Project progress indicator */
+.project-progress {
+  position: absolute;
+  right: clamp(12px, 2vw, 30px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+
+.project-progress-line {
+  width: 3px;
+  height: 24px;
+  background-color: #333;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.project-progress-line.active {
+  background-color: #fff;
+}
+
+/* Outlined pill tag */
+.pill-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #333;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
